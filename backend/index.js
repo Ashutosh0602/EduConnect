@@ -25,18 +25,49 @@ const path = require("path");
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
-  res
+// Database connection
+const mongoose = require("mongoose");
+const userM = require("./modals/user");
+mongoose
+  .connect(
+    `mongodb+srv://ashujn2del:${process.env.PASSWORD}@cluster2.ggzk2hx.mongodb.net/`,
+    {
+      useNewUrlParser: true,
+    }
+  )
+  .then((con) => {
+    console.log("database connected successfully");
+  })
+  .catch((error) => {
+    console.log("Something went wrong on database server");
+  });
+
+// Routes for student
+const userRoute = require("./routes/userRoute");
+app.use("/user", userRoute);
+
+// Routes for teacher
+const teacherRoute = require("./routes/teacherRoute");
+app.use("/teacher", teacherRoute);
+
+// Routes for parent
+const parentRoute = require("./routes/parentRoute");
+app.use("/parent", parentRoute);
+
+app.get("/", async (req, res) => {
+  const db = await userM.find();
+  console.log(db);
+  const data = res
     .status(200)
     .json({ status: "Success", message: "Hello this is get world!!" });
 });
-app.post("/", (req, res) => {
-  const body = req.body;
-  console.log(body);
-  const arr = [body.name, body.branch, body.year];
-  res.status(200).json({ status: "Success", message: arr?.[1] });
+app.post("/", async (req, res) => {
+  const db = await userM.create(req.body);
+
+  res.status(200).json({ status: "Success", message: db });
 });
 
+// Making connection for backend server
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, (err) => {
