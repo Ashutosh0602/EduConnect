@@ -6,6 +6,7 @@
 .pnp.js
 .index.env
 .deploy.env
+*.env
 
 # testing
 /coverage
