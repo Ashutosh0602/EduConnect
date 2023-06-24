@@ -32,6 +32,15 @@ const UserSchema = new mongoose.Schema({
     type: String,
     // required: [true, "Provide your location"],
   },
+  teacher: {
+    type: String,
+    default: null,
+    date: Date.now(),
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 // Salting and hashing of password

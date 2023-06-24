@@ -12,6 +12,26 @@ const TeacherSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  password: {
+    type: String,
+    required: true,
+    minlenght: 8,
+    select: false,
+  },
+  passwordConfirm: {
+    type: String,
+    required: true,
+    validate: {
+      validator: function (el) {
+        return el === this.password;
+      },
+      message: "Password are not same",
+    },
+  },
+  location: {
+    type: String,
+    // required: [true, "Provide your location"],
+  },
 });
 
 // Salting and hashing of password
