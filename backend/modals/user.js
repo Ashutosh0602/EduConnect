@@ -30,21 +30,23 @@ const UserSchema = new mongoose.Schema({
   },
   location: {
     type: String,
-    required: [true, "Provide your location"],
+    // required: [true, "Provide your location"],
   },
 });
 
+// Salting and hashing of password
 UserSchema.pre("save", async function (next) {
   // Only when the password is modified not every time the queryv is updated
   if (!this.isModified("password")) return next();
-
-  this.password = await bcrypt.hash(this.password, 12, function (err, hash) {
-    console.log(hash);
-  });
+  this.password = await bcrypt.hash(this.password, 12);
 
   this.passwordConfirm = undefined;
   next();
 });
+
+UserSchema.methods.correctPassword = async (candidatePass, userPassword) => {
+  return await bcrypt.compare(candidatePass, userPassword);
+};
 
 const userM = mongoose.model("User", UserSchema);
 
