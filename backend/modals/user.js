@@ -12,6 +12,14 @@ const UserSchema = new mongoose.Schema({
     unique: [true, "Unique id is required"],
     required: [true, "Unique id is required"],
   },
+  email: {
+    type: String,
+    required: [true, "A email is required"],
+    unique: [true, "A unique email is required"],
+    lowercase: true,
+    validator: [validator.isEmail, "Please provide a valid email"],
+    select: false,
+  },
   password: {
     type: String,
     required: true,
@@ -46,6 +54,7 @@ const UserSchema = new mongoose.Schema({
 // Salting and hashing of password
 UserSchema.pre("save", async function (next) {
   // Only when the password is modified not every time the queryv is updated
+  console.log("hello");
   if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 12);
 

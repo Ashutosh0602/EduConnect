@@ -11,31 +11,30 @@ const signToken = (uid) => {
 
 // Sign up for student
 exports.createUser = async (req, res) => {
-  console.log(req.body);
-
-  const newUser = await userM.create(req.body);
-
-  const token = signToken(newUser._id);
-
-  const cookie_option = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-  };
-
-  if (process.env.NODE_ENV === "production") cookie_option.secure = true;
-
-  // Sending token as cookie
-  res.cookie("token", token, cookie_option);
-
-  res.status(200).json({
-    status: "success",
-    token,
-    data: newUser,
-  });
-
   try {
+    console.log(req.body);
+
+    const newUser = await userM.create(req.body);
+
+    const token = signToken(newUser._id);
+
+    const cookie_option = {
+      expires: new Date(
+        Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+      ),
+      httpOnly: true,
+    };
+
+    if (process.env.NODE_ENV === "production") cookie_option.secure = true;
+
+    // Sending token as cookie
+    res.cookie("token", token, cookie_option);
+
+    res.status(200).json({
+      status: "success",
+      token,
+      data: newUser,
+    });
   } catch (error) {
     res.status(400).json({ status: "Server error", message: error });
   }
@@ -43,31 +42,30 @@ exports.createUser = async (req, res) => {
 
 // Sign Up for teacher
 exports.createTeacher = async (req, res) => {
-  console.log(req.body);
-
-  const newUser = await teacherM.create(req.body);
-
-  const token = signToken(newUser._id);
-
-  const cookie_option = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-  };
-
-  if (process.env.NODE_ENV === "production") cookie_option.secure = true;
-
-  // Sending token as cookie
-  res.cookie("token", token, cookie_option);
-
-  res.status(200).json({
-    status: "success",
-    token,
-    data: newUser,
-  });
-
   try {
+    console.log(req.body);
+
+    const newUser = await teacherM.create(req.body);
+
+    const token = signToken(newUser._id);
+
+    const cookie_option = {
+      expires: new Date(
+        Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+      ),
+      httpOnly: true,
+    };
+
+    if (process.env.NODE_ENV === "production") cookie_option.secure = true;
+
+    // Sending token as cookie
+    res.cookie("token", token, cookie_option);
+
+    res.status(200).json({
+      status: "success",
+      token,
+      data: newUser,
+    });
   } catch (error) {
     res.status(400).json({ status: "Server error", message: error });
   }
@@ -75,31 +73,30 @@ exports.createTeacher = async (req, res) => {
 
 // Sign Up for parent
 exports.createParent = async (req, res) => {
-  console.log(req.body);
-
-  const newUser = await parentM.create(req.body);
-
-  const token = signToken(newUser._id);
-
-  const cookie_option = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-  };
-
-  if (process.env.NODE_ENV === "production") cookie_option.secure = true;
-
-  // Sending token as cookie
-  res.cookie("token", token, cookie_option);
-
-  res.status(200).json({
-    status: "success",
-    token,
-    data: newUser,
-  });
-
   try {
+    console.log(req.body);
+
+    const newUser = await parentM.create(req.body);
+
+    const token = signToken(newUser._id);
+
+    const cookie_option = {
+      expires: new Date(
+        Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+      ),
+      httpOnly: true,
+    };
+
+    if (process.env.NODE_ENV === "production") cookie_option.secure = true;
+
+    // Sending token as cookie
+    res.cookie("token", token, cookie_option);
+
+    res.status(200).json({
+      status: "success",
+      token,
+      data: newUser,
+    });
   } catch (error) {
     res.status(400).json({ status: "Server error", message: error });
   }

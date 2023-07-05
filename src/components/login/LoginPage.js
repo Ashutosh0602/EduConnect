@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import backgrounds from "../../assets/background.svg";
+import background from "../../assets/back.png";
 import UserLogin from "./UserLogin";
 import TeacherLogin from "./TeacherLogin";
 import ParentLogin from "./ParentLogin";
@@ -14,7 +14,7 @@ const LoginPage = () => {
 
   return (
     <section className="flex">
-      <div className="w-6/12">
+      <div className="w-4/12">
         <div className={`sm:mx-auto sm:w-full sm:max-w-sm `}>
           <img
             className="mx-auto h-40 w-auto"
@@ -22,10 +22,16 @@ const LoginPage = () => {
             alt="Your Company"
           />
         </div>
-        <div className="flex">
-          <div>Student</div>
-          <div>Parent</div>
-          <div>Teacher</div>
+        <div
+          style={{
+            width: slide_width - 70,
+            translate: slide_width / 100 + 50,
+          }}
+          className="flex justify-around"
+        >
+          <div className={classes.user}>Student</div>
+          <div className={classes.user}>Parent</div>
+          <div className={classes.user}>Teacher</div>
         </div>
         <div ref={img_slide} className={`flex ${classes.login_handle}`}>
           <UserLogin width={slide_width} className={classes.login_cont} />
@@ -33,8 +39,8 @@ const LoginPage = () => {
           <ParentLogin width={slide_width} />
         </div>
       </div>
-      <div className="w-8/12 h-screen">
-        <img src={backgrounds} />
+      <div className={` w-8/12 h-screen ${classes.shadow_back}`}>
+        <img className={classes.img_set} src={background} />
       </div>
     </section>
   );

@@ -24,7 +24,7 @@ exports.logInUser = async (req, res) => {
     const user = await userM.findOne({ email: email }).select("+password");
 
     //To check if the password provided is right or wrong
-    if (!user || !user.correctPassword(password, user.password)) {
+    if (!user || !(await user.correctPassword(password, user.password))) {
       return res.status(404).json({
         status: "failed",
         message: "Incorrect email or password",
@@ -36,9 +36,11 @@ exports.logInUser = async (req, res) => {
     return res.status(200).json({
       status: "success",
       token: token,
-      user: user["id"],
+      user: user,
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({ status: "Server error", message: error });
+  }
 };
 
 // LogIn of teacher
@@ -69,7 +71,9 @@ exports.logInTeacher = async (req, res) => {
       token: token,
       user: user["id"],
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({ status: "Server error", message: error });
+  }
 };
 
 // LogIn of parent
@@ -100,5 +104,7 @@ exports.logInParent = async (req, res) => {
       token: token,
       user: user["id"],
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({ status: "Server error", message: error });
+  }
 };

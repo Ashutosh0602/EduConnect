@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./ParentLogin.module.css";
 
 const UserLogin = (prop) => {
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
   return (
     <div
       className={`flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 `}
     >
       <div
-        style={{ width: prop["width"] - 50 }}
+        style={{ width: prop["width"] - 70 }}
         className={`${classes.login_cont}`}
       >
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -26,6 +29,7 @@ const UserLogin = (prop) => {
                   type="email"
                   autoComplete="email"
                   required
+                  onChange={(e) => setemail(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -55,6 +59,7 @@ const UserLogin = (prop) => {
                   type="password"
                   autoComplete="current-password"
                   required
+                  onChange={(e) => setpassword(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -65,7 +70,7 @@ const UserLogin = (prop) => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+                Sign In
               </button>
             </div>
           </form>
