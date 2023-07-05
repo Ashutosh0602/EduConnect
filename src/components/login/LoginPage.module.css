@@ -1,0 +1,27 @@
+.login_handle {
+  padding: calc(50% * (1 / 20));
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  position: relative;
+}
+.login_handle::-webkit-scrollbar {
+  display: hidden;
+}
+::-webkit-scrollbar {
+  display: hidden;
+  background: transparent;
+}
+.login_cont {
+  position: absolute;
+  width: 100%;
+}
+
+/* html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0; 
+  background: transparent; 
+} */

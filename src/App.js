@@ -1,14 +1,18 @@
 import "./App.css";
-import Stream from "./components/Stream";
-import Test from "./components/Test";
+import { Route, Routes, Navigate } from "react-router-dom";
+import LoginPage from "./components/login/LoginPage";
+import SignupPage from "./components/signup/SignupPage";
 
 function App() {
   return (
-    <div className="App">
-      Hello world
-      <Test />
-      <Stream />
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigate to="/logIn" />} />
+      <Route path="logIn" element={<LoginPage />} />
+      <Route path="signUp" element={<SignupPage />} />
+    </Routes>
+    // <div className="App">
+    //   <LoginPage />
+    // </div>
   );
 }
 
