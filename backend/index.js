@@ -17,6 +17,10 @@ app.use(xss());
 const hpp = require("hpp");
 app.use(hpp());
 
+// Intiating module to upload data
+const upload = require("express-fileupload");
+app.use(upload());
+
 // Data sanitization against NOSql Query injection
 const mongoSanitize = require("express-mongo-sanitize");
 app.use(mongoSanitize());
@@ -42,9 +46,11 @@ mongoose
     console.log("Something went wrong on database server");
   });
 
+app.use(express.static(path.join(__dirname, "public")));
+
 // Routes for student
 const userRoute = require("./routes/userRoute");
-app.use("/user", userRoute);
+app.use("/student", userRoute);
 
 // Routes for teacher
 const teacherRoute = require("./routes/teacherRoute");

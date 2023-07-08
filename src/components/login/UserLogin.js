@@ -18,7 +18,7 @@ const UserLogin = (prop) => {
     let data = JSON.stringify({ password: password, email: email });
     console.log("data", data);
 
-    const user = await fetch(`http://localhost:3432/user/logIn`, {
+    const user = await fetch(`http://localhost:3432/student/logIn`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
