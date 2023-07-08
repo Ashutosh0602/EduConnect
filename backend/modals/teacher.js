@@ -8,6 +8,10 @@ const TeacherSchema = new mongoose.Schema({
     required: [true, "Name is Required"],
     maxlength: [30, "Maximum 25 characters"],
   },
+  Tid: {
+    type: String,
+    unique: [true, "ID must be unique"],
+  },
   email: {
     type: String,
     unique: true,
@@ -31,6 +35,14 @@ const TeacherSchema = new mongoose.Schema({
   location: {
     type: String,
     // required: [true, "Provide your location"],
+  },
+  subject: [
+    {
+      type: String,
+    },
+  ],
+  fees: {
+    type: Number,
   },
 });
 
