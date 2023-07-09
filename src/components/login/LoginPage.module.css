@@ -1,6 +1,6 @@
 .login_handle {
   padding: calc(50% * (1 / 20));
-  overflow: hidden;
+  overflow: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
   position: relative;

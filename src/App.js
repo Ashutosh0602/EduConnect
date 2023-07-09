@@ -5,6 +5,8 @@ import LoginPage from "./components/login/LoginPage";
 import SignupPage from "./components/signup/SignupPage";
 import Layout from "./components/layout/Layout";
 import React, { Suspense } from "react";
+import TLayout from "./components/tLayout/TLayout";
+import THome from "./components/tHome/THome";
 
 const Home = React.lazy(() => import("./components/home/Home"));
 const OClass = React.lazy(() => import("./components/class/OClass"));
@@ -22,6 +24,9 @@ function App() {
           <Route path="" element={<Home />} />
           <Route path="class" element={<OClass />} />
           <Route path="setting" element={<Setting />} />
+        </Route>
+        <Route path="/teacher/:ID" element={<TLayout />}>
+          <Route path="" element={<THome />} />
         </Route>
       </Routes>
     </Suspense>

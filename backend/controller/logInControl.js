@@ -49,6 +49,8 @@ exports.logInUser = async (req, res) => {
 // LogIn of teacher
 exports.logInTeacher = async (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
+  //   console.log("password", password);
   try {
     // If any email or password is missing
     if (!email || !password) {
@@ -60,7 +62,7 @@ exports.logInTeacher = async (req, res) => {
     const user = await teacherM.findOne({ email: email }).select("+password");
 
     //To check if the password provided is right or wrong
-    if (!user || !user.correctPassword(password, user.password)) {
+    if (!user || !(await user.correctPassword(password, user.password))) {
       return res.status(404).json({
         status: "failed",
         message: "Incorrect email or password",
@@ -69,13 +71,17 @@ exports.logInTeacher = async (req, res) => {
 
     // Generating token for user with correct credential
     const token = signToken(user._id);
+    console.log("hello", token);
     return res.status(200).json({
       status: "success",
       token: token,
-      user: user["id"],
+      user: {
+        Uid: user["Tid"],
+        name: user["name"],
+      },
     });
-  } catch (error) {
-    res.status(400).json({ status: "Server error", message: error });
+  } catch (err) {
+    res.status(400).json({ status: "Server error", message: err });
   }
 };
 

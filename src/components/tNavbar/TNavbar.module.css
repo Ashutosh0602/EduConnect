@@ -1,0 +1,19 @@
+.navlink {
+  width: calc(100vw * (1 / 20));
+  min-width: 2.5rem;
+  max-width: 3.5rem;
+  height: 100vh;
+  background-color: rgb(221, 221, 221);
+  padding: calc(100% * (1 / 120));
+}
+::selection {
+  background: none;
+}
+.nav_cont {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.nav_cont_other {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
