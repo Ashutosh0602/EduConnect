@@ -1,0 +1,40 @@
+.home_cont {
+  width: 100vw;
+  height: 100vh;
+  /* background-color: aqua; */
+  overflow: scroll;
+}
+.panel_cont {
+  min-width: 5rem;
+  width: 17rem;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: rgb(250, 250, 250);
+  border: 2px;
+  /* max-width : 15rem; */
+  /* overflow: scroll; */
+}
+.panel_cont:hover {
+  transform: scale(1.05);
+  transition: all 0.2s linear;
+}
+.human_cont {
+  background-color: rgb(233, 233, 233);
+  border-radius: 1rem;
+}
+.subject {
+  font-size: 0.8em !important ;
+  font-weight: 100;
+}
+.pay_butt {
+  background-color: #f26e61;
+  color: rgb(242, 241, 241) !important;
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-radius: 0.3rem;
+}
+.pay_butt:hover {
+  background-color: #f24c3d;
+  border-radius: 0.6rem;
+}

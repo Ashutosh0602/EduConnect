@@ -1,3 +1,9 @@
 .layout {
   display: flex;
+  /* width: 100vw; */
+  /* overflow: hidden; */
+}
+.main_cont {
+  /* width: 100vw; */
+  overflow: scroll;
 }
