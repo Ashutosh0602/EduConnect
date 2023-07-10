@@ -9,6 +9,8 @@ const router = express.Router();
 router.route("/signUp").post(AuthControl.createUser);
 router.route("/logIn").post(loginControl.logInUser);
 router.route("/:id").get(studentHome.studentHome);
+router.route("/:id/payment").post(studentHome.studentPayment); // For teachers payment to get access
+router.route("/:id/payment/verify").post(studentHome.studentPayment); // For teachers payment to verify
 router.route("/:id/class").post(studentClass.studentAssignment);
 
 module.exports = router;

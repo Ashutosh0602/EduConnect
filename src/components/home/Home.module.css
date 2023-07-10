@@ -5,7 +5,7 @@
   overflow: scroll;
 }
 .panel_cont {
-  min-width: 5rem;
+  min-width: 17rem;
   width: 17rem;
   margin: 1rem;
   padding: 1rem;
@@ -17,6 +17,12 @@
 .panel_cont:hover {
   transform: scale(1.05);
   transition: all 0.2s linear;
+}
+.panel_div {
+  display: flex;
+  flex: auto;
+  width: 100%;
+  overflow: scroll;
 }
 .human_cont {
   background-color: rgb(233, 233, 233);
