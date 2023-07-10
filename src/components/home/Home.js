@@ -40,21 +40,29 @@ const Home = () => {
       key: "rzp_test_aNYoQ5FgTfdEnR", // Enter the Key ID generated from the Dashboard
       amount: "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       currency: "INR",
-      name: "Acme Corp",
+      name: "Leeds Class",
       description: "Test Transaction",
-      image: "https://example.com/your_logo",
+      image:
+        "https://img.pikbest.com/png-images/online-education-learning-vector-graphic-element_1532815.png!bw700",
       order_id: orderID.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       handler: async function (response) {
         setpaymentID(response.razorpay_payment_id);
         setfinalID(response.razorpay_order_id);
         setsignature(response.razorpay_signature);
-        await fetch(`http://localhost:3432/student/${userId}/payment/verify`, {
+        await fetch(`http://localhost:3432/student/${userId}/payment/verify/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ response }),
-        });
+          body: JSON.stringify({ ...response, orderID: orderID.id }),
+        })
+          .then((res) => res.json())
+          .then((res) => console.log(res));
+      },
+      prefill: {
+        name: "Soumya Dey",
+        email: "SoumyaDey@example.com",
+        contact: "9999999999",
       },
       theme: {
         color: "#3399cc",

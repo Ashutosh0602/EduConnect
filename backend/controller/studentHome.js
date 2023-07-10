@@ -1,11 +1,12 @@
 const Razorpay = require("razorpay");
 const teacherM = require("../modals/teacher");
 var studentM = require("../modals/user");
+const crypto = require("crypto");
 
 // Instantiating Razorpay
 var instance = new Razorpay({
-  key_id: "rzp_test_aNYoQ5FgTfdEnR",
-  key_secret: "slZdnySnaQh9hYfoGCJXawcl",
+  key_id: process.env.key_id,
+  key_secret: process.env.key_secret,
 });
 
 exports.studentHome = async (req, res) => {
@@ -14,24 +15,16 @@ exports.studentHome = async (req, res) => {
   console.log(teacher);
 };
 
+// Information related to payment
 exports.studentPayment = async (req, res) => {
   try {
-    console.log(req.params, req.body);
+    // console.log(req.params, req.body);
 
     var options = {
       amount: 50000, // amount in the smallest currency unit
       currency: "INR",
       receipt: "order_rcptid_11",
     };
-    // var {
-    //   validatePaymentVerification,
-    //   validateWebhookSignature,
-    // } = require("./dist/utils/razorpay-utils");
-    // validatePaymentVerification(
-    //   { order_id: razorpayOrderId, payment_id: razorpayPaymentId },
-    //   signature,
-    //   secret
-    // );
 
     instance.orders.create(options, function (err, order) {
       //   console.log(order);
@@ -40,8 +33,27 @@ exports.studentPayment = async (req, res) => {
   } catch (error) {}
 };
 
+// Verify that payment done is legit or not
 exports.paymentVerify = async (req, res) => {
   try {
-    console.log(req.body);
-  } catch (error) {}
+    const data = req.body;
+
+    const shasum = crypto.createHmac("sha256", "slZdnySnaQh9hYfoGCJXawcl");
+    shasum.update(`${data["orderID"]}|${data["razorpay_payment_id"]}`);
+    const digest = shasum.digest("hex");
+
+    console.log(digest !== data["razorpay_signature"]);
+    if (digest !== data["razorpay_signature"])
+      return res.status(400).json({ msg: "Transaction not legit!" });
+
+    // THE PAYMENT IS LEGIT & VERIFIED
+
+    res.status(200).json({
+      status: "success",
+      orderId: data["razorpay_order_id"],
+      paymentId: data["razorpay_payment_id"],
+    });
+  } catch (error) {
+    res.status(500).json({ status: "failed", message: "Something went wrong" });
+  }
 };
