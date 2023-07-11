@@ -1,7 +1,9 @@
 const Razorpay = require("razorpay");
 const teacherM = require("../modals/teacher");
 var studentM = require("../modals/user");
+const payment = require("../modals/payment");
 const crypto = require("crypto");
+const Payment = require("../modals/payment");
 
 // Instantiating Razorpay
 var instance = new Razorpay({
@@ -37,6 +39,7 @@ exports.studentPayment = async (req, res) => {
 exports.paymentVerify = async (req, res) => {
   try {
     const data = req.body;
+    console.log(data);
 
     const shasum = crypto.createHmac("sha256", "slZdnySnaQh9hYfoGCJXawcl");
     shasum.update(`${data["orderID"]}|${data["razorpay_payment_id"]}`);
@@ -47,6 +50,17 @@ exports.paymentVerify = async (req, res) => {
       return res.status(400).json({ msg: "Transaction not legit!" });
 
     // THE PAYMENT IS LEGIT & VERIFIED
+
+    // Update student's paid field here...
+    const teacher = await teacherM.find({ Tid: data["Tid"] });
+    console.log(req.params);
+    if (teacher) {
+      const addPay = await Payment.create({
+        orderID: data["razorpay_order_id"],
+        paymentID: data["razorpay_payment_id"],
+        teacherID: data["Tid"],
+      });
+    }
 
     res.status(200).json({
       status: "success",

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import human from "../../assets/human.png";
 import classes from "./Home.module.css";
 import useRazorpay from "react-razorpay";
+import { toast, Toaster } from "react-hot-toast";
 
 const Home = () => {
   const Razorpay = useRazorpay();
@@ -46,39 +47,42 @@ const Home = () => {
         "https://img.pikbest.com/png-images/online-education-learning-vector-graphic-element_1532815.png!bw700",
       order_id: orderID.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       handler: async function (response) {
-        setpaymentID(response.razorpay_payment_id);
-        setfinalID(response.razorpay_order_id);
-        setsignature(response.razorpay_signature);
+        // setpaymentID(response.razorpay_payment_id);
+        // setfinalID(response.razorpay_order_id);
+        // setsignature(response.razorpay_signature);
         await fetch(`http://localhost:3432/student/${userId}/payment/verify/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ...response, orderID: orderID.id }),
+          body: JSON.stringify({ ...response, orderID: orderID.id, Tid: id }),
         })
           .then((res) => res.json())
-          .then((res) => console.log(res));
-      },
-      prefill: {
-        name: "Soumya Dey",
-        email: "SoumyaDey@example.com",
-        contact: "9999999999",
+          .then((res) => {
+            if (res["status"] == "success") {
+              toast.success("Payment Successfull😎");
+            } else if (res["status"] == "failed") {
+              toast.error(res["message"]);
+            } else {
+              toast.error(res["msg"]);
+            }
+          });
       },
       theme: {
-        color: "#3399cc",
+        color: "#f26e61",
       },
     };
 
     var rzp1 = new Razorpay(options);
     console.log(rzp1);
     rzp1.on("payment.failed", function (response) {
-      alert(response.error.code);
-      alert(response.error.description);
-      alert(response.error.source);
-      alert(response.error.step);
-      alert(response.error.reason);
-      alert(response.error.metadata.order_id);
-      alert(response.error.metadata.payment_id);
+      toast.error(response.error.code);
+      toast.error(response.error.description);
+      toast.error(response.error.source);
+      toast.error(response.error.step);
+      toast.error(response.error.reason);
+      toast.error(response.error.metadata.order_id);
+      toast.error(response.error.metadata.payment_id);
     });
 
     // document.getElementById("rzp-button1").onclick = function (e) {
@@ -89,6 +93,7 @@ const Home = () => {
 
   return (
     <section className={classes.home_cont}>
+      <Toaster />
       <div>asdfasf</div>
       <div className={classes.panel_div}>
         {data?.["data"].map((e) => {
