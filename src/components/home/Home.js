@@ -11,7 +11,7 @@ const Home = () => {
   const userId = useSelector((state) => state.userProfile.userId);
   const [data, setData] = useState(null);
   const [orderID, setorderID] = useState(null);
-  const [paymentID, setpaymentID] = useState(null);
+  const [amount, setamount] = useState(null);
   const [finalID, setfinalID] = useState(null);
   const [signature, setsignature] = useState(null);
 
@@ -33,19 +33,20 @@ const Home = () => {
     )
       .then((res) => res.json())
       .then((res) => {
+        // setamount(res.);
         console.log(res);
         setorderID(res["orderID"]);
       });
-
+    console.log(pay);
     var options = {
       key: "rzp_test_aNYoQ5FgTfdEnR", // Enter the Key ID generated from the Dashboard
-      amount: "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      amount: orderID?.["amount"], // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       currency: "INR",
       name: "Leeds Class",
       description: "Test Transaction",
       image:
         "https://img.pikbest.com/png-images/online-education-learning-vector-graphic-element_1532815.png!bw700",
-      order_id: orderID.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      order_id: orderID?.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       handler: async function (response) {
         // setpaymentID(response.razorpay_payment_id);
         // setfinalID(response.razorpay_order_id);

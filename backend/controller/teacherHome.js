@@ -10,11 +10,16 @@ exports.teacherHome = async (req, res) => {
 
   const teacher = await teacherM.findOneAndUpdate({ Tid: req.params.id }, body);
   if (teacher) {
-    return res
-      .status(200)
-      .json({
-        status: "success",
-        message: "Teacher information succesfully updated",
-      });
+    return res.status(200).json({
+      status: "success",
+      message: "Teacher information succesfully updated",
+    });
+  }
+};
+
+exports.teacherHomePanel = async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(401).json({ status: "failed", message: "Something went wrong" });
   }
 };

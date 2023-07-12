@@ -5,7 +5,8 @@ exports.studentAssignment = async (req, res) => {
   var name = files.name;
 
   //   Upload path with file name
-  uploadPath = __dirname + "/public/student/" + name;
+  uploadPath =
+    "/Users/ashutoshrai/nextJs/e-class/e-class/e-class/backend/public/" + name;
 
   files.mv(uploadPath, (err) => {
     if (err) {

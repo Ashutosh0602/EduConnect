@@ -1,36 +1,34 @@
 const mongoose = require("mongoose");
 
 const teacherDataSchema = mongoose.Schema({
-  teacherID: {
-    Tid: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Teacher",
-    },
-    student: [
-      {
-        id: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
-        },
-        classroom: {
-          assignment: [
-            {
-              date: new Date.now(),
-              title: String,
-              description: String,
-            },
-          ],
-          test: [
-            {
-              date: new Date.now(),
-              name: String,
-              marks: String,
-            },
-          ],
-        },
-      },
-    ],
+  Tid: {
+    type: String,
+    // ref: "Teacher",
   },
+  student: [
+    {
+      Uid: {
+        type: String,
+        // ref: "User",
+      },
+      assignment: [
+        {
+          title: String,
+          description: String,
+          file: String,
+          SubmitFile: String,
+          date: { type: String, default: Date.now() },
+        },
+      ],
+      test: [
+        {
+          name: String,
+          marks: String,
+          date: { type: String, default: Date.now() },
+        },
+      ],
+    },
+  ],
 });
 
 const teacherDM = mongoose.model("TeacherData", teacherDataSchema);

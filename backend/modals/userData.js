@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
 
-const DataSchema = new mongoose.Schema({
+const UserDataSchema = new mongoose.Schema({
   userID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    type: String,
+    unique: [true, "One ID cannot be used multiple times"],
+    // ref: "User",
   },
   teacher: [
     {
       id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Teacher",
+        type: String,
+        // ref: "Teacher",
       },
       assignment: [
         {
@@ -42,6 +43,6 @@ const DataSchema = new mongoose.Schema({
   ],
 });
 
-const userDM = mongoose.model("UserData", UserSchema);
+const userDM = mongoose.model("UserData", UserDataSchema);
 
 module.exports = userDM;
