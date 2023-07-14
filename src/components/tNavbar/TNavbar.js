@@ -18,7 +18,7 @@ const TNavbar = () => {
         </NavLink>
       </div>
       <div className={classes.nav_cont_other}>
-        <NavLink to={`/student/${userId}`}>
+        <NavLink to={`/teacher/${userId}`}>
           <img alt="home" src={home} />
         </NavLink>
       </div>

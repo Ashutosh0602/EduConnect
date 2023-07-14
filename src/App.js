@@ -11,6 +11,7 @@ import THome from "./components/tHome/THome";
 const Home = React.lazy(() => import("./components/home/Home"));
 const OClass = React.lazy(() => import("./components/class/OClass"));
 const Setting = React.lazy(() => import("./components/setting/Setting"));
+const TClass = React.lazy(() => import("./components/tClass/TClass"));
 
 function App() {
   // debugger;
@@ -27,6 +28,7 @@ function App() {
         </Route>
         <Route path="/teacher/:ID" element={<TLayout />}>
           <Route path="" element={<THome />} />
+          <Route path="/teacher/:ID/:SID" element={<TClass />} />
         </Route>
       </Routes>
     </Suspense>

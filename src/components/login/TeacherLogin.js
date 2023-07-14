@@ -36,9 +36,9 @@ const TeacherLogin = (prop) => {
         console.log(res);
         if (res["status"] === "success") {
           dispatch(userAction.login(res["token"]));
-          dispatch(userAction.set(res["user"]["Tid"]));
+          dispatch(userAction.set(res["user"]["Uid"]));
 
-          navigate(`/teacher/${res["user"]["Tid"]}`);
+          navigate(`/teacher/${res["user"]["Uid"]}`);
         }
       });
   }

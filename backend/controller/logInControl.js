@@ -49,7 +49,7 @@ exports.logInUser = async (req, res) => {
 // LogIn of teacher
 exports.logInTeacher = async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   //   console.log("password", password);
   try {
     // If any email or password is missing
@@ -71,7 +71,7 @@ exports.logInTeacher = async (req, res) => {
 
     // Generating token for user with correct credential
     const token = signToken(user._id);
-    console.log("hello", token);
+    // console.log("hello", token);
     return res.status(200).json({
       status: "success",
       token: token,

@@ -1,0 +1,18 @@
+.OClass_cont {
+  height: 100vh;
+  overflow: scroll;
+}
+.offline_cont {
+  background-color: #f5f7fa;
+  width: calc(110vw * (16 / 25));
+  height: calc(110vw * (9 / 25));
+  min-width: 700px;
+  min-height: 394px;
+  position: relative;
+}
+.offline_cont > div:nth-child(1) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -12,6 +12,7 @@ var instance = new Razorpay({
 });
 
 exports.studentHome = async (req, res) => {
+  console.log(req.user);
   const teacher = await teacherM.find().select(["-password", "-_id"]);
   return res.status(200).json({ status: "success", data: teacher });
   console.log(teacher);

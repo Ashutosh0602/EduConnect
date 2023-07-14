@@ -9,6 +9,7 @@ const Home = () => {
   const Razorpay = useRazorpay();
 
   const userId = useSelector((state) => state.userProfile.userId);
+  const token = useSelector((state) => state.userProfile.token);
   const [data, setData] = useState(null);
   const [orderID, setorderID] = useState(null);
   const [amount, setamount] = useState(null);
@@ -16,7 +17,13 @@ const Home = () => {
   const [signature, setsignature] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3432/student/${userId}/`)
+    fetch(`http://localhost:3432/student/${userId}/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => setData(res));
   }, []);
@@ -27,7 +34,10 @@ const Home = () => {
       `http://localhost:3432/student/${userId}/payment/`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ Tid: id }),
       }
     )
@@ -55,6 +65,7 @@ const Home = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ ...response, orderID: orderID.id, Tid: id }),
         })

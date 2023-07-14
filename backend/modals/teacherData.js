@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const teacherDataSchema = mongoose.Schema({
+const teacherDataSchema = new mongoose.Schema({
   Tid: {
     type: String,
     // ref: "Teacher",
