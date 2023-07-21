@@ -16,3 +16,44 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.liveClass_cont {
+  position: relative;
+  width: calc(110vw * (16 / 25));
+  height: calc(110vw * (9 / 25));
+  min-width: 700px;
+  min-height: 394px;
+  background-color: aqua;
+}
+.stream_cont {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  /* width: 0; */
+}
+.stream_cont > video {
+  /* width: 0rem; */
+  width: calc(110vw * (16 / 25));
+  height: calc(110vw * (9 / 25));
+  min-width: 700px;
+  min-height: 394px;
+  /* background-color: black; */
+}
+.stream_cont_user {
+  /* background-color: black; */
+  position: absolute;
+  z-index: 1000;
+  bottom: 0%;
+  right: 0%;
+}
+.callPNG {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3rem;
+  z-index: 5000;
+}
+.callPNG > button {
+  cursor: pointer;
+}

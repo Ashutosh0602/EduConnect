@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
-import Peer from "simple-peer";
-import { io } from "socket.io-client";
-import classes from "./TClass.module.css";
+import React, { useRef, useState } from "react";
+import classes from "./OClass.module.css";
 import facetime from "../../assets/Facetime.svg";
-import callPNG from "../../assets/VideoCall.png";
+import callPNG from "../../assets/Call.png";
 
-const TVideo = () => {
+const OVideo = () => {
   const ref = useRef();
+  const myVideo = useRef();
+  const userVideo = useRef();
+  const connectionRef = useRef();
 
-  // variables for streaming video
   const [stream, setStream] = useState();
   const [me, setme] = useState("");
   const [call, setcall] = useState({});
@@ -16,29 +16,11 @@ const TVideo = () => {
   const [callEnded, setCallEnded] = useState(false);
   const [name, setName] = useState("");
 
-  const myVideo = useRef();
-  const userVideo = useRef();
-  const connectionRef = useRef();
-  const callref = useRef();
-  const offline = useRef();
-
-  function inputEnter(e) {
-    if (e.target.value) {
-      callref.current.style.display = "inline-block";
-      offline.current.style.display = "none";
-    } else {
-      callref.current.style.display = "none";
-      offline.current.style.display = "block";
-    }
-  }
-
-  const socket = io("http://localhost:3432");
-
   return (
     <div
       ref={ref}
       className={classes.liveClass_cont}
-      //   onChange={() => console.log(ref.current?.offsetWidth)}
+      onChange={() => console.log(ref.current?.offsetWidth)}
     >
       <div className={classes.stream_cont}>
         <video
@@ -62,20 +44,17 @@ const TVideo = () => {
         // ref={ref}
         className={classes.offline_cont}
       >
-        <div ref={offline}>
+        <div>
           <img src={facetime} />
         </div>
       </div>
-      <div ref={callref} className={classes.callPNG}>
+      <div className={classes.callPNG}>
         <button>
           <img src={callPNG} />
         </button>
-      </div>
-      <div>
-        <input onChange={inputEnter} />
       </div>
     </div>
   );
 };
 
-export default TVideo;
+export default OVideo;

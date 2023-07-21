@@ -3,6 +3,7 @@ import classes from "./OClass.module.css";
 import facetime from "../../assets/Facetime.svg";
 import { useParams } from "react-router";
 import { io } from "socket.io-client";
+import OVideo from "./OVideo";
 
 const OClass = () => {
   const ref = useRef();
@@ -29,7 +30,8 @@ const OClass = () => {
   return (
     <section className={classes.OClass_cont}>
       <div>
-        <div>
+        {<OVideo />}
+        {/* <div>
           <div
             ref={ref}
             onChange={() => console.log(ref.current.offsetWidth)}
@@ -39,7 +41,7 @@ const OClass = () => {
               <img src={facetime} />
             </div>
           </div>
-        </div>
+        </div> */}
         <div>
           <input type="file" ref={file} name="file" onChange={post_file} />
         </div>

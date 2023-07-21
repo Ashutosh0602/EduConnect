@@ -11,7 +11,7 @@ const Layout = () => {
     }
   };
   return (
-    <main className={classes.layout} onClick={(e) => console.log(window)}>
+    <main className={classes.layout}>
       <Navbar />
       <Outlet className={classes.main_cont} />
     </main>
