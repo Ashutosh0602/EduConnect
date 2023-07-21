@@ -2,11 +2,18 @@ import React, { useEffect, useRef } from "react";
 import classes from "./OClass.module.css";
 import facetime from "../../assets/Facetime.svg";
 import { useParams } from "react-router";
+import { io } from "socket.io-client";
 
 const OClass = () => {
   const ref = useRef();
   const file = useRef();
   const param = useParams();
+
+  const socket = io("http://localhost:3432");
+  socket.on("me", (id) => {
+    console.log(id);
+    // setme(id);
+  });
 
   async function post_file() {
     const formData = new FormData();

@@ -1,5 +1,11 @@
 const express = require("express");
 const app = express();
+const server = require("http").createServer(app);
+
+const socket = require("socket.io");
+const stream = require("./controller/videoStream");
+const ano = stream.Stream;
+ano(server);
 
 // To enable resources to collected from another domain
 const cors = require("cors");
@@ -76,7 +82,18 @@ app.post("/", async (req, res) => {
 // Making connection for backend server
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, (err) => {
+server.listen(PORT, (err) => {
   if (!err) console.log("Successfully connectd to the port", PORT);
   else console.error("Failed to connect to server");
 });
+
+// const io = socket(server, {
+//   cors: {
+//     origin: "*",
+//     methods: ["GET", "POST"],
+//   },
+// });
+// io.on("connection", (socket) => {
+//   console.log(socket.id);
+//   socket.emit("me", socket.id);
+// });
