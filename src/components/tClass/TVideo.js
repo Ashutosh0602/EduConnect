@@ -84,6 +84,13 @@ const TVideo = () => {
     });
   };
 
+  // Leave the stream
+  const leaveCall = () => {
+    setCallEnded(true);
+    connectionRef.current.destroy();
+    // call;
+    window.location.reload();
+  };
   return (
     <div
       ref={ref}

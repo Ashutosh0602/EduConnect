@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import classes from "./OClass.module.css";
 import facetime from "../../assets/Facetime.svg";
 import callPNG from "../../assets/Call.png";
+import callDPNG from "../../assets/Phone_off.png";
 
 const socket = io("http://localhost:3432");
 
@@ -12,10 +13,14 @@ const OVideo = () => {
   const myVideo = useRef();
   const userVideo = useRef();
   const connectionRef = useRef();
+  const callPick = useRef();
+  const callLeave = useRef();
+  const offline = useRef();
 
   const [stream, setStream] = useState();
   const [me, setme] = useState("");
   const [call, setcall] = useState({});
+  const [IsCalling, setIsCalling] = useState(false);
   const [callAccepted, setCallAccepted] = useState(false);
   const [callEnded, setCallEnded] = useState(false);
   const [name, setName] = useState("");
@@ -25,12 +30,29 @@ const OVideo = () => {
       .getUserMedia({ video: true, audio: true })
       .then((currentStream) => {
         setStream(currentStream);
-        console.log(currentStream);
         myVideo.current.srcObject = currentStream;
 
         answerCall();
+        setCallAccepted(true);
       });
   }
+
+  useEffect(() => {
+    if (IsCalling) {
+      callPick.current.style.display = "block";
+      offline.current.style.display = "none";
+    } else {
+      offline.current.style.display = "block";
+      callPick.current.style.display = "none";
+    }
+  }, [IsCalling]);
+
+  useEffect(() => {
+    if (callAccepted) {
+      callPick.current.style.display = "none";
+      callLeave.current.style.display = "block";
+    }
+  }, [callAccepted]);
 
   // Setting websocket connection to share data
   useEffect(() => {
@@ -40,7 +62,11 @@ const OVideo = () => {
     });
 
     socket.on("callUser", ({ from, name: callerName, signal }) => {
+      console.log("from", from);
       setcall({ isRecievedCall: true, from, name: callerName, signal });
+      setIsCalling(true);
+      //   console.log(call);
+      //   callPick.current.style.display = "block";
     });
   }, []);
 
@@ -48,7 +74,6 @@ const OVideo = () => {
     const peer = new Peer({ initiator: false, trickle: false, stream });
 
     peer.on("signal", (data) => {
-      console.log("from", call.from);
       socket.emit("answerCall", { signal: data, to: call.from });
     });
 
@@ -59,6 +84,14 @@ const OVideo = () => {
     peer.signal(call.signal);
 
     connectionRef.current = peer;
+  };
+
+  //   Leave the stream
+  const leaveCall = () => {
+    setCallEnded(true);
+    connectionRef.current.destroy();
+    // call;
+    window.location.reload();
   };
 
   return (
@@ -81,17 +114,19 @@ const OVideo = () => {
           width={ref.current?.offsetWidth * 0.4}
         />
       </div>
-      <div
-        // ref={ref}
-        className={classes.offline_cont}
-      >
-        <div>
+      <div className={classes.offline_cont}>
+        <div ref={offline}>
           <img src={facetime} />
         </div>
       </div>
-      <div className={classes.callPNG}>
+      <div ref={callPick} className={classes.callPNG}>
         <button onClick={receiveCall}>
           <img src={callPNG} />
+        </button>
+      </div>
+      <div ref={callLeave} className={classes.callPNG}>
+        <button ref={callLeave} onClick={leaveCall}>
+          <img src={callDPNG} />
         </button>
       </div>
     </div>

@@ -25,17 +25,6 @@ const OClass = () => {
     <section className={classes.OClass_cont}>
       <div>
         {<OVideo />}
-        {/* <div>
-          <div
-            ref={ref}
-            onChange={() => console.log(ref.current.offsetWidth)}
-            className={classes.offline_cont}
-          >
-            <div>
-              <img src={facetime} />
-            </div>
-          </div>
-        </div> */}
         <div>
           <input type="file" ref={file} name="file" onChange={post_file} />
         </div>
