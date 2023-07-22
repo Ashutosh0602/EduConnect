@@ -38,6 +38,7 @@
   height: calc(110vw * (9 / 25));
   min-width: 700px;
   min-height: 394px;
+  object-fit: cover;
   /* background-color: black; */
 }
 .stream_cont_user {

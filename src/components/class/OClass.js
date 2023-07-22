@@ -10,12 +10,6 @@ const OClass = () => {
   const file = useRef();
   const param = useParams();
 
-  const socket = io("http://localhost:3432");
-  socket.on("me", (id) => {
-    console.log(id);
-    // setme(id);
-  });
-
   async function post_file() {
     const formData = new FormData();
     formData.append("newFile", file.current.files[0]);
