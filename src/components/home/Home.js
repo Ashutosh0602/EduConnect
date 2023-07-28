@@ -4,8 +4,12 @@ import human from "../../assets/human.png";
 import classes from "./Home.module.css";
 import useRazorpay from "react-razorpay";
 import { toast, Toaster } from "react-hot-toast";
+import OTeacher from "./OTeacher";
+import { useParams } from "react-router";
 
 const Home = () => {
+  const param = useParams();
+
   const Razorpay = useRazorpay();
 
   const userId = useSelector((state) => state.userProfile.userId);
@@ -106,7 +110,7 @@ const Home = () => {
   return (
     <section className={classes.home_cont}>
       <Toaster />
-      <div>asdfasf</div>
+      <div>{<OTeacher />}</div>
       <div className={classes.panel_div}>
         {data?.["data"].map((e) => {
           return (

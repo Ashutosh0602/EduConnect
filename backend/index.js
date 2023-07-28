@@ -86,14 +86,3 @@ server.listen(PORT, (err) => {
   if (!err) console.log("Successfully connectd to the port", PORT);
   else console.error("Failed to connect to server");
 });
-
-// const io = socket(server, {
-//   cors: {
-//     origin: "*",
-//     methods: ["GET", "POST"],
-//   },
-// });
-// io.on("connection", (socket) => {
-//   console.log(socket.id);
-//   socket.emit("me", socket.id);
-// });

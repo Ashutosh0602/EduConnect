@@ -23,7 +23,7 @@ function App() {
         <Route path="signUp" element={<SignupPage />} />
         <Route path="/student/:ID" element={<Layout />}>
           <Route path="" element={<Home />} />
-          <Route path="class" element={<OClass />} />
+          <Route path="class/:tid" element={<OClass />} />
           <Route path="setting" element={<Setting />} />
         </Route>
         <Route path="/teacher/:ID" element={<TLayout />}>
