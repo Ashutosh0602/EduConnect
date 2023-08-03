@@ -84,7 +84,6 @@ exports.paymentVerify = async (req, res) => {
         Tid: data["Tid"],
         student: [{ Uid: req.params.id }],
       });
-      console.log(teacherData);
     }
 
     // Find student and add teacher ID to his data
@@ -94,15 +93,14 @@ exports.paymentVerify = async (req, res) => {
       const studentData = await userDM.findOneAndUpdate(
         { userID: req.params.id },
         {
-          $push: { teacher: [{ id: data["Tid"] }] },
+          $push: { teacher: [{ tid: data["Tid"] }] },
         }
       );
     } else {
       const studentData = await userDM.create({
         userID: req.params.id,
-        teacher: [{ id: data["Tid"] }],
+        teacher: [{ tid: data["Tid"] }],
       });
-      console.log(studentData);
     }
 
     res.status(200).json({

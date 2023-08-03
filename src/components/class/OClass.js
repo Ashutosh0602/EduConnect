@@ -4,7 +4,7 @@ import facetime from "../../assets/Facetime.svg";
 import { useParams } from "react-router";
 import { io } from "socket.io-client";
 import OVideo from "./OVideo";
-import OFile from "./OFile";
+import Owork from "./Owork";
 
 const OClass = () => {
   const ref = useRef();
@@ -30,7 +30,8 @@ const OClass = () => {
           <input type="file" ref={file} name="file" onChange={post_file} />
         </div>
       </div>
-      <div>{<OFile />}</div>
+
+      <div>{<Owork />}</div>
     </section>
   );
 };

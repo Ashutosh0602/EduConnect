@@ -23,6 +23,8 @@ const OTeacher = () => {
       .then((res) => res.json())
       .then((res) => setTeacher(res["data"]));
   }, []);
+  console.log(teacher);
+
   return (
     <section>
       <div>Teachers</div>
@@ -34,13 +36,13 @@ const OTeacher = () => {
               <div className={classes.human_cont}>
                 <img src={human} />
               </div>
-              <div className="text-2xl text-gray-800">{teach["id"]}</div>
+              <div className="text-2xl text-gray-800">{teach["tid"]}</div>
               <div className="flex justify-between items-center">
                 <div>
                   <button
                     className={classes.pay_butt}
                     onClick={() =>
-                      navigate(`/student/${param.ID}/class/${teach["id"]}`)
+                      navigate(`/student/${param.ID}/class/${teach["tid"]}`)
                     }
                   >
                     Class

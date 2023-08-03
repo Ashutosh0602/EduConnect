@@ -8,7 +8,7 @@ const UserDataSchema = new mongoose.Schema({
   },
   teacher: [
     {
-      id: {
+      tid: {
         type: String,
         // ref: "Teacher",
       },

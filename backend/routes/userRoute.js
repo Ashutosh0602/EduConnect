@@ -15,10 +15,10 @@ router.use(protect.protect); // For authroizing user at every route
 router.route("/:id").get(studentHome.studentHome);
 router.route("/:id/payment").post(studentHome.studentPayment); // For teachers payment to get access
 router.route("/:id/payment/verify").post(studentHome.paymentVerify); // For teachers payment to verify
-router
-  .route("/:id/class")
-  .post(studentClass.studentAssignment)
-  .get(studentClass.assignmentRetrive);
+router.route("/:id/class").get(studentClass.assignmentRetrive);
 
-router.route("/:id/class/:tid").get(studentClass.teacherAssignment);
+router
+  .route("/:id/class/:tid")
+  .get(studentClass.teacherAssignment)
+  .post(studentClass.studentAssignment);
 module.exports = router;

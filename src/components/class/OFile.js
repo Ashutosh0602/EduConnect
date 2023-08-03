@@ -1,72 +1,57 @@
 import * as React from "react";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useParams } from "react-router";
-import { useSelector } from "react-redux";
+// import { useParams } from "react-router";
+// import { useSelector } from "react-redux";
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from "@material-tailwind/react";
 
 const OFile = () => {
-  const param = useParams();
-  const token = useSelector((state) => state.userProfile.token);
+  //   const param = useParams();
+  //   const [work, setWork] = React.useState(null);
+  //   const token = useSelector((state) => state.userProfile.token);
+  const [open, setOpen] = React.useState(1);
 
-  console.log(param);
-  React.useEffect(() => {
-    fetch(`http://localhost:3432/student/${param.ID}/class/${param.tid}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  }, []);
+  const handleOpen = (value) => setOpen(open === value ? 0 : value);
 
-  const innerComp = () => (
-    <div>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Accordion 1</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
+  return (
+    <section>
+      <Accordion open={open === 1}>
+        <AccordionHeader onClick={() => handleOpen(1)}>
+          What is Material Tailwind?
+        </AccordionHeader>
+        <AccordionBody>
+          We&apos;re not always in the position that we want to be at.
+          We&apos;re constantly growing. We&apos;re constantly making mistakes.
+          We&apos;re constantly trying to express ourselves and actualize our
+          dreams.
+        </AccordionBody>
       </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Accordion 2</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
+      <Accordion open={open === 2}>
+        <AccordionHeader onClick={() => handleOpen(2)}>
+          How to use Material Tailwind?
+        </AccordionHeader>
+        <AccordionBody>
+          We&apos;re not always in the position that we want to be at.
+          We&apos;re constantly growing. We&apos;re constantly making mistakes.
+          We&apos;re constantly trying to express ourselves and actualize our
+          dreams.
+        </AccordionBody>
       </Accordion>
-      <Accordion disabled>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
-          <Typography>Disabled Accordion</Typography>
-        </AccordionSummary>
+      <Accordion open={open === 3}>
+        <AccordionHeader onClick={() => handleOpen(3)}>
+          What can I do with Material Tailwind?
+        </AccordionHeader>
+        <AccordionBody>
+          We&apos;re not always in the position that we want to be at.
+          We&apos;re constantly growing. We&apos;re constantly making mistakes.
+          We&apos;re constantly trying to express ourselves and actualize our
+          dreams.
+        </AccordionBody>
       </Accordion>
-    </div>
+    </section>
   );
-
-  return <section>OFILE{innerComp}</section>;
 };
 
 export default OFile;

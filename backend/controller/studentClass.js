@@ -5,7 +5,6 @@ exports.studentAssignment = async (req, res) => {
 
   var files = req.files.newFile;
   var name = files.name;
-
   //   Upload path with file name
   uploadPath =
     "/Users/ashutoshrai/nextJs/e-class/e-class/e-class/backend/public/" + name;
@@ -13,13 +12,22 @@ exports.studentAssignment = async (req, res) => {
   files.mv(uploadPath, (err) => {
     if (err) {
       console.log(err);
-      res.status(500).send(err);
-    } else {
-      res
-        .status(200)
-        .json({ status: "success", message: "Image Uploaded Successfully" });
+      return res.status(500).send(err);
     }
   });
+  const data = await userDM.findOneAndUpdate(
+    {
+      userID: req.params.id,
+    },
+    {
+      teacher: { tid: req.params.tid },
+      assignment: { $push: { title: name } },
+    }
+  );
+  console.log(data);
+  res
+    .status(200)
+    .json({ status: "success", message: "Image Uploaded Successfully" });
 };
 
 exports.assignmentRetrive = async (req, res) => {
@@ -35,13 +43,18 @@ exports.assignmentRetrive = async (req, res) => {
 
 exports.teacherAssignment = async (req, res) => {
   try {
-    const assig = userDM.find({
-      userID: req.params.id,
-      "teacher.id": req.params.tid,
-    });
-    console.log(assig);
+    const data = await userDM.find(
+      { userID: req.params.id },
+      { teacher: { $elemMatch: { tid: { $in: req.params.tid } } } }
+    );
 
-    res.status(200).json({ status: "success", message: "yahoo" });
+    // const data = await userDM.find({
+    //   userID: req.params.id,
+    //   teacher: { $elemMatch: { tid: { $in: req.params.tid } } },
+    // });
+    console.log("ehlo", data);
+    res.status(200).json({ status: "success", message: data[0]["teacher"][0] });
+    // res.status(200).json({ status: "success", message: data[0]["teacher"] });
   } catch (error) {
     res
       .status(400)
