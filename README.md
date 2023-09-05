@@ -1,10 +1,11 @@
+# E-Class
 <img width="1440" alt="Screenshot 2023-09-02 at 2 04 04 PM" src="https://github.com/Ashutosh0602/E-class/assets/85889617/501dd9f8-f951-4466-a371-a518400ae51c">
 
 # Problem
 
 1. The problem in finding the best teacher.
-2. Proper setup is not provided.
-3. Bad connection between teacher and student.
+2. Proper setup is not provided teacher, student and parents.
+3. Bad connection between teacher and student related to assignment.
 4. Parents can’t monitor the progress of student and teacher activities.
 
 # Solution
