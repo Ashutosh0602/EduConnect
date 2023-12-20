@@ -1,4 +1,4 @@
-# E-Class
+# EduConnect
 <img width="1440" alt="Screenshot 2023-09-02 at 2 04 04 PM" src="https://github.com/Ashutosh0602/E-class/assets/85889617/501dd9f8-f951-4466-a371-a518400ae51c">
 
 # Problem
